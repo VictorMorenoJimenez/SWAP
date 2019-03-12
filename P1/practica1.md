@@ -91,7 +91,34 @@ Y ahora, si queremos por ejemplo que M1 se conecte directamente a M2:
 Y así es como podrems acceder directamente sin contraseña de M1 a M2.
 
 
-## Pruebaa **curl**
+## Prueba curl
+A continuación se muestra una imagen de como funciona curl. En este ejemplo como tanto la ip **192.168.56.50**, como
+**192.168.56.51** son dos servidores web con apache instalado, al hacerle curl nos muestra por pantalla el index.html 
+de cada servidor. 
+
+![uso curl](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P1/curlfull.png)
+
+Podemos comprobar que en **swapM1** obtenemos el index.html de **M2** y viceversa.
+
+Ya únicamente nos queda acceder mediante **ssh** en nuestra lista de objetivos.
+
+- [X] Instalar ubuntu server con **LAMP** y **curl**
+- [X] Instalar y configurar **ssh**.
+- [X] Acceder mediante **curl** de una máquina a la otra.
+- [ ] Acceder mediante **ssh** de una máquina a la otra.
+
+## Prueba ssh
+Por último se muestra una imágen dónde estoy conectado desde el host a **M1** y **M2** y se procede a hacer **ssh** una a la otra. En este caso no nos pide contraseña ya que, hemos realizado _ssh-copy-id_ en ambas máquinas para que se conozcan y no sea
+necesario el uso de contraseña.
+
+![uso curl](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P1/m1tom2m2tom1FULL.png)
+
+Ahora sí, nuestra lista de objetivos está cumplida y la práctica 1 realizada!
+
+- [X] Instalar ubuntu server con **LAMP** y **curl**
+- [X] Instalar y configurar **ssh**.
+- [X] Acceder mediante **curl** de una máquina a la otra.
+- [X] Acceder mediante **ssh** de una máquina a la otra.
 
 
 
