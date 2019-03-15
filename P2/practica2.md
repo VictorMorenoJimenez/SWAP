@@ -59,3 +59,16 @@ De éste modo, cada vez que los minutos marquen el 00, todas las horas, todos lo
 En definitiva cada hora de todo el año.
 
 ![crontab](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P2/images/crontabm2copiaam1.png)
+
+Por último comprobamos que hemos cumplido todos los objetivos de la práctica...
+
+- [X] Probar funcionamiento de la copia de archivos por **ssh**
+- [X] Clonar contenido entre máquinas.
+- [X] Configurar el **ssh** para acceder a máquinas remotas **sin contraseña**.
+- [X] Establecer una tarea en **cron** que se ejecute cada hora para mantener actualizado el contenido de **/var/www/**
+      entre las dos máquinas.
+      
+Efectivamente!
+
+
+
