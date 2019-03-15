@@ -21,3 +21,15 @@ Para poder acceder sin contraseña:
 ```bash
    ssh-copy-id usuario@ipMáquina
 ```
+## Prueba funcionamiento copia de archivos por ssh.
+
+A continuación, utilizaremos la herramienta **rsync** junto con **ssh** para copiar una **carpeta remota** desde la máquina 2 hasta la máquina 1. Para ello utilizaremos el siguiente comando:
+```bash
+   rsync -avz -e ssh ipMáquina1:$RutaACarpetaM1 $RutaCarpetaM2
+```
+
+De éste modo la carpeta con ruta __ipMáquina1:$RutaACarpetaM1__ se sincronizará con la carpeta con ruta __RutaCarpetaM2__.
+
+Vemos una foto con un ejemplo real:
+
+![uso curl](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P2/images/pruebarsynccopiarcarpeta.png)
