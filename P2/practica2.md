@@ -52,6 +52,9 @@ Para llevar a cabo nuestro objetivo simplemente tenemos que añadir una línea n
    00 * * * * victorswap      rsync -avz -e ssh 192.168.56.50:/var/www/ /var/www
 ```
 
+Hay que tener en cuenta que, como se quiere copiar a la **M2** la carpeta desde **M1** la ip que debemos poner en el comando
+es la de **M1**.
+
 De éste modo, cada vez que los minutos marquen el 00, todas las horas, todos los días y todos los meses se ejecutará la tarea.
 En definitiva cada hora de todo el año.
 
