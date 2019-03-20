@@ -29,6 +29,11 @@ Observamos que nos aparece un mensaje de que ya tenemos las claves copiadas y es
 
 ## Prueba funcionamiento copia de archivos por ssh
 
+En primer lugar probaremos el funcionamiento de **tar** junto con **ssh** para crear ficheros locales en un equipo remoto.
+Para ello, mandamos con un **pipe** la salida de tar hacia ssh. Ssh recibe la información y la escribirá en un fichero. Veamos un ejemplo junto con el comando:
+
+[![tar-ssh](https://asciinema.org/a/UJK9r5ZQn6Zk1CbMC4wqVpG48.svg)](https://asciinema.org/a/UJK9r5ZQn6Zk1CbMC4wqVpG48)
+
 A continuación, utilizaremos la herramienta **rsync** junto con **ssh** para copiar una **carpeta remota** desde la máquina 2 hasta la máquina 1. Para ello utilizaremos el siguiente comando:
 ```bash
    rsync -avz -e ssh ipMáquina1:$RutaACarpetaM1 $RutaCarpetaM2
