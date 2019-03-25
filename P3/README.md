@@ -4,7 +4,7 @@
 
 - [ ] Configurar una máquina e instalarle el **nginx** como balanceador de carga.
 - [ ] Configurar una máquina e instalarle el **haproxy** como balanceador de carga.
-- [ ] Comprobar funcioamiento algoritmos e balanceo **round-robin** _Peso M1 = 2*Peso M2_
+- [ ] Comprobar funcionamiento de algoritmos de balanceo como **round-robin** _Peso M1 = 2*Peso M2_.
 - [ ] Someter a la granja web a una alta carga, generada con herramienta **Apache Benchmark**, probar primero con nginx y después con haproxy.
 - [ ] Comparativa en tiempos de ambos balanceadores.
 - [ ] _Opcional_: Balanceo utilizando otro software como **Pound**.
@@ -29,4 +29,11 @@ y modificamos el fichero:
 ```bash
   sudo nano /etc/nginx/conf.d/default.conf
 ```
+
+Para una configuración inicial, sencilla editamos el fichero como aparece a continuación:
+
+![iniConf](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/confInicial.png)
+
+El primer campo **upstream** indica los servidores apaches que dispone el balanceador. A continuación con la directiva
+server se incluyen una serie de parámetros como el puerto de escucha, el nombre del servidor, donde almacenar los logs etc.
 
