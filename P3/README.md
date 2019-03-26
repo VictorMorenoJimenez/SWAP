@@ -188,6 +188,75 @@ A continuación se muestra la tabla con los resultados obtenidos para 100, 1000 
 
 Podemos comprobar como para las 100 peticiones iniciales **nginx** va más rápido mientras que cuando las peticiones aumentan **haproxy** funciona más rápido. Para gran cantidad de carga **haproxy** funciona **1.29** veces más rápido que **nginx**.
 
+Llegados a este punto ya hemos cumplido casi todos los objetivos de la práctica 3.
 
+- [X] Configurar una máquina e instalarle el **nginx** como balanceador de carga.
+- [X] Configurar una máquina e instalarle el **haproxy** como balanceador de carga.
+- [X] Comprobar funcionamiento de algoritmos de balanceo como **round-robin** _Peso M1 = 2*Peso M2_.
+- [X] Someter a la granja web a una alta carga, generada con herramienta **Apache Benchmark**, probar primero con nginx y después con haproxy.
+- [X] Comparativa en tiempos de ambos balanceadores.
+- [ ] _Opcional_: Balanceo utilizando otro software como **Pound**.
+
+Para finalizar el último objetivo, utilizaremos **Pound** como balanceador.
 
 ## Pound como balanceador de carga.
+
+Instalamos pound, en ubuntu basta con ejecutar:
+
+```bash
+  sudo apt-get install pound
+```
+
+Para configurar pound modificamos su fichero de configuración principal 
+
+```bash
+  sudo nano /etc/pound/pound.cfg
+```
+
+Las directivas de éste fichero son autoexplicativas y muy fáciles de entender. Simplemente añadiendo los servidores web finales
+y indicándole que escuche peticiones http por el puerto 80 ya tendríamos un balanceador de carga operativo. A continuación se muestra un ejemplo de configuración:
+
+![poundConf](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/poundConf.png)
+
+Para que la configuración surja efecto y se cargue al arrancar, debemos cambiar un parámetro del fichero _/etc/default/pound_.
+
+![poundConf](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/poundStartup.png)
+
+Si queremos establecer prioridades en los servidores basta con indicar dentro de la directiva _BackEnd_ el parámetro _Priority_. Cuanto más alto es éste parámetro más prioridad tiene el servidor final o más peso tendrá. Un ejemplo dando el doble de prioridad a la máquina 1 que a la máquina 2:
+
+![poundPriority](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/poundPriority.png)
+
+Por último ejecutaremos **apache benchmark** para comparar el rendimiento con **nginx** y **haproxy**.
+
+
+```bash
+  ab -n 100 -c 10 http://192.168.56.52/index.html
+```
+Resultados:
+
+![resultados100Pound](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats100Pound.png)
+
+```bash
+  ab -n 1000 -c 10 http://192.168.56.52/index.html
+```
+Resultados:
+
+![resultados1000Pound](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats1000Pound.png)
+
+```bash
+  ab -n 10000 -c 10 http://192.168.56.52/index.html
+```
+Resultados:
+
+![resultados10000Pound](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats10000Pound.png)
+
+
+## Comparativa final
+
+Por último añadimos la información obtenida de **Pound** a nuestra tabla de tiempos. Comprobamos que Pound es un poco más lento que nginx y que haproxy.
+
+| Balanceador   | 100       | 1000  |   10000   |
+| ------------- |:-------------:| -----:| :----: |
+| Nginx         | 0.035 | 0.343 |   3.073    |
+| Haproxy       | 0.037      |   0.230 |   2.383   |
+| Pound       | 0.052      |   0.533 |   4.831   |
