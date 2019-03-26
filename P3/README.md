@@ -146,7 +146,7 @@ en la directiva _backend servers_ donde definimos nuestros servidores web añadi
 
 ```bash
   backend servers
-        server m1 192.168.56.50 maxconn 32 weight 3
+        server m1 192.168.56.50 maxconn 32 weight 2
         server m2 192.168.56.51 maxconn 32 weight 1
 ```
 
