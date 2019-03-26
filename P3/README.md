@@ -141,7 +141,14 @@ A continuación desde el host procedemos de igual forma que con nginx, vamos a l
 
 ![balanceoHaproxy](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/balanceoHaproxy.png)
 
+El siguiente paso con _haproxy_ será otorgarle más carga a la máquina1 que a la máquina 2. Para ello de forma parecida a nginx
+en la directiva _backend servers_ donde definimos nuestros servidores web añadimos al final de la línea el parámetro _weight_ con el peso indicado.
 
+```bash
+  backend servers
+        server m1 192.168.56.50 maxconn 32 weight 3
+        server m2 192.168.56.51 maxconn 32 weight 1
+```
 
 
 
