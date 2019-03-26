@@ -78,3 +78,34 @@ De ésta forma con la orden _weight_ le estamos dando más importancia a la máq
 Y probamos la nueva configuración realizando 3 peticiones _curl_.
 
 ![balanceTest](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/curlPesos.png)
+
+Una vez comprobado que funciona el algoritmo _round robbin_ con pesos, vamos a someter a nuestro balanceador nginx a una alta carga utilizando el software __apache benchmark__. Para ello lo instalaremos en el host y lanzaremos una alta carga al balanceador. __Apache benchmark__ es una herramienta muy sencilla que nos ayudará a poner a prueba nuestro servidor web, en este caso nuestro balanceador de carga. Su instalación en _ubuntu_ es muy sencilla:
+
+```bash
+  sudo apt-get install apache2-utils
+```
+
+Una vez instalado vamos a hacer 3 pruebas de carga con nuestro balanceador nginx: Primero lanzaremos una carga pequeña de unas 100 peticiones, segundo una carga media de unas 1000 peticiones y por último una carga alta de unas 10000 peticiones. El parámetro _-c_ nos indica la concurrencia que la dejaremos en 10 para todas las pruebas. Desde el host ejecutamos las 3 pruebas y analizamos los resultados:
+
+```bash
+  ab -n 100 -c 10 http://192.168.56.52/index.html
+```
+Resultados:
+
+![resultados100](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats100.png)
+
+```bash
+  ab -n 1000 -c 10 http://192.168.56.52/index.html
+```
+Resultados:
+
+![resultados1000](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats1000.png)
+
+```bash
+  ab -n 10000 -c 10 http://192.168.56.52/index.html
+```
+Resultados:
+
+![resultados10000](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats10000.png)
+
+
