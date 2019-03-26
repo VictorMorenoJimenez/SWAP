@@ -36,4 +36,20 @@ Para una configuración inicial, sencilla editamos el fichero como aparece a con
 
 El primer campo **upstream** indica los servidores apaches que dispone el balanceador. A continuación con la directiva
 server se incluyen una serie de parámetros como el puerto de escucha, el nombre del servidor, donde almacenar los logs etc.
+Antes de reiniciar el servicio debemos desactivar la configuración por defecto que viene con nginx. Para ello borraremos el fichero de configuración siguiente:
+
+```bash
+  sudo rm /etc/nginx/sites-enabled/default
+```
+
+Para comprobar que el servicio está funcionando correctamente lanzamos el comando:
+
+```bash
+  sudo systemctl restart nginx
+```
+
+Si no aparece ningún error parece que el fichero de configuración está correctamente. Vamos a probar lanzando desdde el **host** dos órdenes _curl_ para comprobar que el balanceo funciona correctamente. Importante que el _index.html_ de _M1_ y _M2_ sea diferente para diferenciar cuando responde _M1_ y cuando _M2_. En la siguiente foto se muestra una petición de __curl__ a la máquina _balanceadora_, comprobamos como efectivamente hace una petición a cada máquina. Funciona como balanceadora de carga!
+
+
+![balanceTest](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/curlBalancer.png)
 
