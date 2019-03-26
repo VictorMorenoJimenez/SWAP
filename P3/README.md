@@ -150,8 +150,30 @@ en la directiva _backend servers_ donde definimos nuestros servidores web añadi
         server m2 192.168.56.51 maxconn 32 weight 1
 ```
 
+Igual que con nginx, la carga se distribuye de forma que la máquina 1 recibe el doble de carga que la máquina 2.
 
+Ha llegado el momento de poner a prueba el balanceador haproxy, de la misma forma que _nginx_ ejecutaremos las mismas órdenes con **apache benchmark** y analizarmeos los resultados: 
 
+```bash
+  ab -n 100 -c 10 http://192.168.56.52/index.html
+```
+Resultados:
+
+![resultados100Haproxy](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats100Haproxy.png)
+
+```bash
+  ab -n 1000 -c 10 http://192.168.56.52/index.html
+```
+Resultados:
+
+![resultados1000Haproxy](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats1000Haproxy.png)
+
+```bash
+  ab -n 10000 -c 10 http://192.168.56.52/index.html
+```
+Resultados:
+
+![resultados10000Haproxy](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats10000Haproxy.png)
 
 
 
