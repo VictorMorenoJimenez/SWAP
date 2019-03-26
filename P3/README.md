@@ -178,10 +178,16 @@ Resultados:
 ![resultados10000Haproxy](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats10000Haproxy.png)
 
 ## Comparativa Resultados
-Como hemos podido observar en las fotos, los resultados de **nginx** para 100 1000 y 10000 peticiones respectivamente son:
-**0.035, 0.343, 3.073**.
-Y los resultados para **haproxy**: **0.037, 0.230, 2.382**.
+A continuación se muestra la tabla con los resultados obtenidos para 100, 1000 y 10000 peticiones usando nginx y haproxy.
+
+| Balanceador   | 100       | 1000  |   10000   |
+| ------------- |:-------------:| -----:| :----: |
+| Nginx         | 0.035 | 0.343 |   3.073    |
+| Haproxy       | 0.037      |   0.230 |   2.383   |
+
+
 Podemos comprobar como para las 100 peticiones iniciales **nginx** va más rápido mientras que cuando las peticiones aumentan **haproxy** funciona más rápido. Para gran cantidad de carga **haproxy** funciona **1.29** veces más rápido que **nginx**.
+
 
 
 ## Pound como balanceador de carga.
