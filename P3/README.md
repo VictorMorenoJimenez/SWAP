@@ -109,3 +109,42 @@ Resultados:
 ![resultados10000](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/stats10000.png)
 
 
+Éstos resultados los utilizaremos para compararlos con los tiempos de **haproxy** el próximo balanceador a comparar. Ya hemos terminado con __nginx__ con lo cual deberemos desactivar el servicio ya que corren en el mismo puerto. Para ello:
+
+
+```bash
+  sudo systemctl stop nginx
+```
+
+Y procedemos a la instalación de **haproxy**. En ubuntu una vez más es muy sencillo:
+
+```bash
+  sudo apt-get install haproxy
+```
+
+Una vez instalado debemos modificar el archivo de configuración _/etc/haproxy/haproxy.cfg_ igual que hicimos con nginx.
+
+```bash
+  sudo nano /etc/haproxy/haproxy.cfg
+```
+Borramos la configuración que viene por defecto. El fichero final debe quedar como el de la imágen.
+
+![haproxyConf](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/haproxyConf.png)
+
+Con ésta configuración le indicamos a haproxy quienes son las dos máquinas servidoras web finales, m1 y m2, que escuchan por el puerto 80. También se definen otros parámetros como el timeout de la conexión, del cliente y del servidor. Para comprobar el funcionamiento de haproxy primero lo lanzamos indicandole el fichero de configuración:
+
+```bash
+  sudo /usr/sbin/haproxy -f /etc/haproxy/haproxy.cfg
+```
+
+A continuación desde el host procedemos de igual forma que con nginx, vamos a lanzar peticiones _curl_ para observar si el balanceo lo ejecuta correctamente:
+
+![balanceoHaproxy](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P3/img/balanceoHaproxy.png)
+
+
+
+
+
+
+
+
