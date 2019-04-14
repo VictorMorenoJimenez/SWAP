@@ -253,10 +253,12 @@ Resultados:
 
 ## Comparativa final
 
-Por último añadimos la información obtenida de **Pound** a nuestra tabla de tiempos. Comprobamos que Pound es un poco más lento que nginx y que haproxy.
+Por último añadimos la información obtenida de **Pound** a nuestra tabla de tiempos. Comprobamos que Pound es un poco más lento que nginx y que haproxy. Haproxy resulta ganador en cuanto a tiempo de respuesta para las peticiones html. 
+Adicionalmente se ha hecho una prueba final con 1 millón de peticiones. Podemos comprobar que los resultados son prácticamente proporcionales.
 
-| Balanceador   | 100       | 1000  |   10000   |
-| ------------- |:-------------:| -----:| :----: |
-| Nginx         | 0.035 | 0.343 |   3.073    |
-| Haproxy       | 0.037      |   0.230 |   2.383   |
-| Pound       | 0.052      |   0.533 |   4.831   |
+| Balanceador   | 100       | 1000  |   10000   |  100000 |  1000000 |
+| ------------- |:-------------:| -----:| :----: | :----: |:----: |
+| Nginx         | 0.035 | 0.343 |   3.073    | 29.384 | 294.125| 
+| Haproxy       | 0.037      |   0.230 |   2.383   |  22.407   |228.674  |
+| Pound       | 0.052      |   0.533 |   4.831   |  45.269     |449.222     |
+
