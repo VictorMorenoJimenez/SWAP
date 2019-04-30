@@ -3,3 +3,5 @@
 Docker y en general el software de contenedores está de moda en el mundo del software. Hoy en día las grandes compañías están adoptando un estilo de trabajo DevOps y Docker permite que estos equipos de desarrollo consigan una alta eficiencia en la entrega y despliegue de su software. Gracias a Docker podemos separar los distintos componentes o servicios de una aplicación en entornos aislados donde no habrá problemas de compatibilidad con otro software. Sin embargo éstos contenedores pueden comunicarse con facilidad. En este punto es donde entra en juego Kubernetes, que es un software de código abierto para administrar aplicaciones en contenedores. Kubernetes esta diseñado para agrupar los contenedores en unidades lógicas para su fácil administración.
 
 El propósito de este documento es ilustrar como desplegar una aplicación Django dockerizada sobre un clúster con Kubernetes. Primeramente desplegaremos un clúster sobre Hetzner Cloud orquestado con Kubernetes dónde desplegaremos la aplicación Django. 
+
+## Dockerizar una aplicación Django.
