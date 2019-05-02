@@ -55,7 +55,7 @@ Aquí hacemos una pequeña demo de como lanzando el hkube y el kubespray se lanz
 ### Panel de control Kubernetes
 Explicar como se lanza el panel de control como se instala y mostrar algunas capturas para ver la funcionalidad.
 
-### Crear deployments para los contenedores.
+## Paso 3. Crear deployments para los contenedores.
 Explicar como se han creado los ficheros .yaml de los deployments y mostrar una captura así como 
 el comando para hacerlos correr con kubectl.
 
