@@ -1,6 +1,6 @@
 # Desplegar clúster de Kubernetes en servidores de Hetzner Cloud
 
-![logo UGR](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/branch/path/to/img.png)
+![logo UGR](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/logougr.png)
 
 ## Introducción
 Docker y en general el software de contenedores está de moda en el mundo del software. Hoy en día las grandes compañías están adoptando un estilo de trabajo DevOps y Docker permite que estos equipos de desarrollo consigan una alta eficiencia en la entrega y despliegue de su software. Gracias a Docker podemos separar los distintos componentes o servicios de una aplicación en entornos aislados donde no habrá problemas de compatibilidad con otro software. Sin embargo éstos contenedores pueden comunicarse con facilidad. En este punto es donde entra en juego Kubernetes, que es un software de código abierto para administrar aplicaciones en contenedores. Kubernetes esta diseñado para agrupar los contenedores en unidades lógicas para su fácil administración.
