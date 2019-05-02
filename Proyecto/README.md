@@ -1,9 +1,9 @@
 # Desplegar clúster de Kubernetes en servidores de Hetzner Cloud
 
-<img src="https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/logougr.png" width="700">
-
 ## Autores
 Moreno Jiménez, Víctor
+
+
 Pozo Tena, Pablo
 
 ## Introducción
