@@ -111,9 +111,26 @@ Es un daemon o demonio que agrupa el núcleo principal de control de Kubernetes.
 
 El kubelet es la unidad primaria de Kubernetes. Cada nodo posee un agente llamado kubelet. Kubelete abstrae la información de requisitos de un pod a través de la API server y se encarga de que lo descrito en estos ficheros .yaml de configuración esté en sintonía con el estado del pod. 
 
+* Proxy
+
+Para manejar el subnetting de los hosts individuales y hacer posible la conectividad entre otros servicios, un pequeño servicio de proxy se crea en cada nodo. Este proceso se encarga de hacer balanceo de carga y de hacer accesible el nodo.
 
 Ahora que ya conocemos los conceptos básicos vamos a ver como interactúan entre ellos: 
+De forma general, el Master es el responasble de administrar todo el clúster. Cada nodo (ya sea una máquina física, virtual o varias máquinas físicas o virtuales), posee un Kubelet que es el agente que va a realizar las comunicaciones con el Master.  Cuando se despliega una aplicación en un clúster de Kubernetes, se informa al Master a través de los ficheros .yaml llamados deployment. El Master se encarga de distribuir estos contenedores a través del clúster y de cumplir con los requisitos especificados en estos ficheros de configuración .yaml(requisitos de memoria RAM, CPU, memoria...). A su vez los nodos se comunican con el Master usando la Kubernetes API que el Master ofrece.  
 
+Desde un punto de vista más cercano, diferenciando los 3 procesos de el nodo Master lo que ocurre al crear un deployment es lo siguiente:
+
+* kubectl (la forma de comunicarse con el Master por línea de comandos) escribe en la API server.
+* API server valida la información y la almacena en Cluster store(etcd)
+* etcd le devuelve la confirmación a API server.
+* API server invoca al scheduler.
+* Scheduler se encarga de decidir en que servidores va a desplegar los pods y le devuelve el control al API server.
+* API server lo almacena en etcd.
+* etcd manda confirmación a la API server.
+* API server invoca los kubelets necesarios segun los nodos desplegados.
+* Kubelet se comunica con el Docker daemon utilizando la API sobre un socket de Docker para crear el contenedor.
+* Kubelet actualiza el estado del pod recién creado e informa a la API server.
+* API server almacena el nuevo estado en etcd.
 
 Concepto de cluster de desplegar cluster de kubernetes en una maquina.
 Explicar el flujo de control de kubernetes. Como el master va controlando los workers.
