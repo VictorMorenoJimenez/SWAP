@@ -26,6 +26,15 @@ A continuación se muestra como ejemplo la arquitectura de Docker y sus contened
 
 ![Arquitectura Docker](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/dockerArchitecture.png)
 
+Esta imágen ilustra perfectamente el funcionamiento de Docker. De izquierda a derecha:
+1. Docker_Client
+- Nested Docker 2
+2. Another item
+3. Another item
+4. Another item
+5. Another item
+6. Another item
+
 En este proyecto se ha elegido Docker como software de contenedores y se explicará más adelante como se ha dockerizado la aplicación Django.
 
 #### Arquitectura Kubernetes
