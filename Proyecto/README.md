@@ -238,7 +238,9 @@ Por último la base de datos no necesitará de un Dockerfile ya que al no tener 
 
 Una vez ya tenemos todos nuestros Dockerfiles creados debemos construir las imágenes con el comando docker build y una vez construida la imágen procederemos a subirla a nuestro registro privado de imágenes configurado en gitlab. Ésto se muestra en el siguiente video.
 
-[BuildImage](https://asciinema.org/a/Vb3f9v9Ts2mpmRrCynqm6hYsX)
+[BuildImage]()
+
+[![buildimaage](https://asciinema.org/a/Vb3f9v9Ts2mpmRrCynqm6hYsX)](https://asciinema.org/a/Vb3f9v9Ts2mpmRrCynqm6hYsX)
 
 
 ## Paso 2. Desplegar clúster de kubernetes en el servidor de Hetzner.
