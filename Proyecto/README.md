@@ -50,7 +50,7 @@ En este proyecto se ha elegido Docker como software de contenedores y se explica
 
 Ahora ya conocemos los conceptos básicos de lo que es un contenedor y unas pinceladas de como funciona Docker. El propósito de este documento no es una guía extensa de Docker. Si se quiere profundizar en el tema puede consultar la documentación oficial.
 
-#### Arquitectura Kubernetes
+### Arquitectura Kubernetes
 Anteriormente hemos presentado Kubernetes como un software de orquestación de aplicaciones para administrar y monitorizar los contenedores. Esto está muy bien pero, ¿cómo consigue Kubernetes realizar esto? 
 
 Antes de nada vamos a explicar unos conceptos previos necesarios para la explicación posterior:
@@ -81,6 +81,9 @@ Un servicio en Kubernetes se puede definir como la gestión de acceso a los pods
 
 
 ### ¿Cómo funciona Kubernetes?
+
+Como ya sabemos, Kubernetes se encarga de gestionar un conjunto de contenedores facilitando el acceso y monitorización de cara a los administradores del sistema. Kubernetes engloba un conjunto de máquinas y facilita una API para que el administrador pueda gestionar los nodos.
+
 Concepto de cluster de desplegar cluster de kubernetes en una maquina.
 Explicar el flujo de control de kubernetes. Como el master va controlando los workers.
 Como los deployments los ejecuta el master cada vez q falla algo.
