@@ -135,9 +135,18 @@ Desde un punto de vista más cercano, diferenciando los 3 procesos de el nodo Ma
 Ahora que ya conocemos como funciona Kubernetes, sus conceptos básicos, y conocemos la arquitectura de Docker en su forma más básica estamos preparados para comenzar con el despliegue de la aplicación en un clúster de kubernetes. 
 
 ## Paso 1. Dockerizar aplicación Django
-Aquí explicar los pasos a seguir para Dockerizar una aplicación Django separnado el backend, frotnend y db.
-Explicar los conceptos de Dockerfile y como hemos creado las imagenes con el build para subirlas a un registry privado .
-Explicar el propósito de dockerizar ya que la única forma de que se despliegue sobre un clúster de kubernetes una aplicación es que éste en contenedores. 
+Como condición inicial para desplegar un clúster de Kubernetes, debemos tener dockerizada la aplicación Django. Como ejemplo hemos elegido una aplicación desarrollada por Intelligenia S.I empresa en la que actualmente Víctor Moreno Jiménez está realizando las prácticas de empresa y Pablo Pozo Tena trabaja en el puesto de sysadmin.
+
+Para dockerizar copicloud hemos separado la aplicación en tres bloques:
+* Frontend: aplicación Angular.
+* Backend: aplicación Django.
+* Base de datos: mariadb.
+
+Para empezar debemos realizar los correspondientes Dockerfiles para cada una de éstas partes. No profundizaremos mucho en como se han realizado los Dockerfiles simplemente añadir que en éstos se indica como instalar las dependencias correspondientes de cada aplicación y las directivas para cuando se ejecute el contenedor:
+
+´´´ bash
+hola
+´´´
 
 ## Paso 2. Desplegar clúster de kubernetes en el servidor de Hetzner.
 ### Servidores Hetzner Cloud.
