@@ -27,23 +27,58 @@ A continuación se muestra como ejemplo la arquitectura de Docker y sus contened
 ![Arquitectura Docker](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/dockerArchitecture.png)
 
 Esta imágen ilustra perfectamente el funcionamiento de Docker. De izquierda a derecha:
-1. Docker_Client
-- Nested Docker 2
-2. Another item
-3. Another item
-4. Another item
-5. Another item
-6. Another item
+* Docker_Client
+
+
+ Estos son los comandos básicos para trabajar con Docker.
+ Build para construir la imagen
+ Pull para bajar una imagen del registry
+ Run para correr una imagen ya creada.
+* Docker_Host
+
+
+ En este apartado tenemos un ejemplo de Docker corriendo en un equipo con varios contenedores.
+ Cada contenedor se puede construir con una imágen diferente creada o descargada de algún registro de Docker o privado.
+* Registry
+
+
+ El registry es un repositorio donde se almacenan las imágenes de Docker. 
+ Los registry pueden ser privados o públicos. El registry más famoso de Docker es docker-hub donde la comunidad puede subir sus   imágenes personalizadas.
+
 
 En este proyecto se ha elegido Docker como software de contenedores y se explicará más adelante como se ha dockerizado la aplicación Django.
 
+Ahora ya conocemos los conceptos básicos de lo que es un contenedor y unas pinceladas de como funciona Docker. El propósito de este documento no es una guía extensa de Docker. Si se quiere profundizar en el tema puede consultar la documentación oficial.
+
 #### Arquitectura Kubernetes
-Explicar los conceptos claves de kubernetes como por ejemplo:
-Cluster
-Master
-Workers
-CoreDNS
-y Mucho mas
+Anteriormente hemos presentado Kubernetes como un software de orquestación de aplicaciones para administrar y monitorizar los contenedores. Esto está muy bien pero, ¿cómo consigue Kubernetes realizar esto? 
+
+Antes de nada vamos a explicar unos conceptos previos necesarios para la explicación posterior:
+
+* Clúster
+
+Conjunto de servidores o máquinas, físicas o virtuales, que utiliza Kubernetes.
+
+* Pod
+
+Un Pod es a Kubernetes lo que un contenedor es a Docker. Por ejemplo, cuando nosotros despleguemos nuestra aplicación, el contenedor asociado a la base de datos, pasará a ser un pod en Kubernetes.
+
+* Replica
+
+Kubernetes nos permite crear réplicas de nuestros pods de manera sencilla gracias a los deployments.
+
+* Deployment
+
+Un deployment usualmente es un fichero .yaml que el nodo maestro utilizará para desplegar los pods. En los ficheros deployment le indicamos al máster la cantidad de recursos que el pod en cuestión necesitará o cuantas réplicas queremos desplegar. Por ejemplo, desplegando un servidor nginx le podemos decir al máster a través de el fichero deployment que el pod ha de tener 4GB de ram y 40GB de disco. El nodo máster se encargará de que no le falten recursos al pod.
+
+* Node
+
+Un nodo en Kubernetes es una máquina "esclava o trabajadora". Usualmente un nodo corresponde con una máquina física y cada nodo contiene los servicios necesarios para correr sus "pods" y es gobernado por el nodo máster.
+* Service
+
+Un servicio en Kubernetes se puede definir como la gestión de acceso a los pods y abstracción de pods. Como ejemplo podemos considerar un servidor backend con 3 replicas. El pod con el frontend no debería preocuparse de si el backend cambia porque el maestro lo ha decidido. Aquí es donde entran los servicios que permite a los pods despreocuparse.
+
+
 
 ### ¿Cómo funciona Kubernetes?
 Concepto de cluster de desplegar cluster de kubernetes en una maquina.
