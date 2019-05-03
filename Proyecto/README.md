@@ -240,10 +240,17 @@ Una vez ya tenemos todos nuestros Dockerfiles creados debemos construir las imá
 
 [![buildimaage](https://asciinema.org/a/xqNHk4wCl5hkzS5nIXM8rqeHz.svg)](https://asciinema.org/a/xqNHk4wCl5hkzS5nIXM8rqeHz)
 
+Lo que ocurre en el video anterior es:
+* Entramos en nuestro registry privado en gitlab.
+* Construimos la imagen a partir del Dockerfile.
+* Subimos la imagen a el registry para acceder a el desde Kubernetes.
+
+Ahora si, todos los ingredientes están listos para desplegar el clúster de Kubernetes en los servidores Hetzner Cloud. Lo que sigue a continuación requiere de tener contratado el servicio de Hetzner Cloud y poder crear máquinas en el. Éste servicio no es gratuito y se factura por tiempo.
+
 
 ## Paso 2. Desplegar clúster de kubernetes en el servidor de Hetzner.
 ### Servidores Hetzner Cloud.
-Explicar aquí que para nuestro trabajo y demostración ha sido necesario la adquisición de unas máquina hetzner cloud. Explicar también antes que Hetzner es una empresa de hosting que alquila servidores etc.
+Como hemos comentadio anteriormente, para el propósito de este documento hemos adquirido dos máquinas CX21 en los servidores de Hetzner Cloud. Esto es imprescindible ya que para desplegar un clúster de Kubernetes necesitamos varias máquinas.
 
 ### Script para lanzar clúster de Kubernetes.
 Mencionamos el proyecto creado en github de esta gente creado por usuarios y que con una pequeña configuración poniendo las credenciales de Hetzner y poco más te crea un clúster en Hetzner Cloud.
