@@ -14,11 +14,20 @@ El propósito de este documento es ilustrar como desplegar una aplicación Djang
 Para comprender el propósito de este documento así como su puesta en práctica hay que conocer una série de conceptos previos que son indispensables para entender el proyecto.
 
 ## Conceptos previos
-### Contenedor
-Explicar concepto de contenedor y principales software de contenerización.
 
 ### Kubernetes
 Para definir correctamente Kubernetes debemos tener en cuenta el conceto de orquestador. En el ámbito del software, un orquestador es un programa que maneja interconexiones e interacciones entre cargas de trabajo en nubes públicas y privadas. Un orquestador se encarga de conectar las tareas automatizadas en un flujo de trabajo para cumplir las metas con vigilancia de permisos y aplicación de políticas concretas. Esto es, en esencia, Kubernetes un gran director de orquesta que dirige y gobierna los contenedores. Dicho así parece muy sencillo y así es pero para entender Kubernetes hay que entender su arquitectura y como se las arregla para poder administrar, monitorizar y interconectar los diferentes contenedores.
+
+### Contenedor
+Como hemos explicado anteriormente, Kubernetes es un software de orquestación de contenedores. Esto nos conduce a la siguiente pregunta, ¿qué es un contenedor?
+
+Un contenedor no es más que un sistema aislado con un conjunto de tecnologías que permiten ofrecer un servicio en su totalidad. Los contenedores aportan modularidad y previenen errores de compatibilidad ya que una vez creado el contenedor puede correr en cualquier servidor. Por ejemplo, si queremos pasar una aplicación a contenedores debemos separar los distintos servicios que ofrece la aplicación en contenedores. Un contenedor para el frontend, otro para el backend y un último para la base de datos. Dentro del contenedor se especifican las necesidades particulares de cada servicio. Por ejemplo en el contenedor de base de datos si se usa mariadb, crearemos un contenedor con una imágen base de mariadb y los parámetros de configuración necesarios. 
+
+A continuación se muestra como ejemplo la arquitectura de Docker y sus contenedores. Fíjese que Docker no virtualiza hardware como haría una máquina virtual si no que corre sobre el mismo sistema anfitrión lo que lo hace mucho más liviano. A partir de ahí una vez instalado Docker en la máquina se pueden desplegar tantos contenedores como las prestaciones del servidor admitan.
+
+
+
+En este proyecto se ha elegido Docker como software de contenedores y se explicará más adelante como se ha dockerizado la aplicación Django.
 
 #### Arquitectura Kubernetes
 Explicar los conceptos claves de kubernetes como por ejemplo:
