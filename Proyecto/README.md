@@ -190,6 +190,55 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ```
 
+El Dockerfile de el backend contiene las instrucciones para desplegar un entorno python con las instrucciones para instalar todas las dependencias que necesita el servidor de copicloud para gestionar los documentos. 
+
+```bash
+FROM python:2.7-stretch
+
+ENV PYTHONUNBUFFERED 1
+
+RUN echo "deb http://www.deb-multimedia.org stretch main non-free" >> /etc/apt/sources.list
+RUN apt-get update && apt-get install python-dev -y
+RUN apt-get install libmariadbclient-dev -y
+RUN apt-get install deb-multimedia-keyring -y --allow-unauthenticated
+
+RUN dpkg --add-architecture i386; apt-get update ;\
+    apt-get install -y  acroread
+
+
+RUN apt-get install -y libjpeg-dev libfreetype6-dev zlib1g-dev libtiff-dev libwebp-dev liblcms2-dev graphviz-dev graphviz pkg-config libxml2-dev libxslt1-dev
+RUN apt-get install -y ghostscript texlive poppler-utils imagemagick libreoffice-writer libreoffice-impress
+
+RUN rm -rf /var/lib/apt/lists/*
+
+
+# Requirements are installed here to ensure they will be cached.
+COPY ./src/requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt \
+    && rm -rf /requirements.txt
+
+COPY ./start.sh /start.sh
+RUN sed -i 's/\r//' /start.sh
+RUN chmod +x /start.sh
+
+COPY ./entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r//' /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+COPY ./src /app
+
+WORKDIR /app
+
+ENTRYPOINT ["/entrypoint.sh", "/start.sh"]
+
+```
+
+Por último la base de datos no necesitará de un Dockerfile ya que al no tener ningún tipo de dependencia especial se utilizará la imágen mariadb:latest descargada directamente de los repositorios de docker-hub. 
+
+
+Una vez ya tenemos todos nuestros Dockerfiles creados debemos construir las imágenes con el comando docker build y una vez construida la imágen procederemos a subirla a nuestro registro privado de imágenes configurado en gitlab. Ésto se muestra en el siguiente video.
+
+
 ## Paso 2. Desplegar clúster de kubernetes en el servidor de Hetzner.
 ### Servidores Hetzner Cloud.
 Explicar aquí que para nuestro trabajo y demostración ha sido necesario la adquisición de unas máquina hetzner cloud. Explicar también antes que Hetzner es una empresa de hosting que alquila servidores etc.
