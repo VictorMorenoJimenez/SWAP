@@ -85,7 +85,7 @@ Un servicio en Kubernetes se puede definir como la gestión de acceso a los pods
 Como ya sabemos, Kubernetes se encarga de gestionar un conjunto de contenedores facilitando el acceso y monitorización de cara a los administradores del sistema. Kubernetes engloba un conjunto de máquinas y facilita una API para que el administrador pueda gestionar los nodos.
 
 
-![Arquitectura Kubernetes](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/arquitecturaKubernetes.png)
+![Arquitectura Kubernetes](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/kubernetesarchitecture.png)
 
 Concepto de cluster de desplegar cluster de kubernetes en una maquina.
 Explicar el flujo de control de kubernetes. Como el master va controlando los workers.
