@@ -3,7 +3,6 @@
 ## Autores
 Moreno Jiménez, Víctor
 
-
 Pozo Tena, Pablo
 
 ## Introducción
@@ -25,7 +24,7 @@ Un contenedor no es más que un sistema aislado con un conjunto de tecnologías 
 
 A continuación se muestra como ejemplo la arquitectura de Docker y sus contenedores. Fíjese que Docker no virtualiza hardware como haría una máquina virtual si no que corre sobre el mismo sistema anfitrión lo que lo hace mucho más liviano. A partir de ahí una vez instalado Docker en la máquina se pueden desplegar tantos contenedores como las prestaciones del servidor admitan.
 
-
+![Arquitectura Docker](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/architectureDocker.png)
 
 En este proyecto se ha elegido Docker como software de contenedores y se explicará más adelante como se ha dockerizado la aplicación Django.
 
