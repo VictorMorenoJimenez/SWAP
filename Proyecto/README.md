@@ -142,11 +142,53 @@ Para dockerizar copicloud hemos separado la aplicación en tres bloques:
 * Backend: aplicación Django.
 * Base de datos: mariadb.
 
-Para empezar debemos realizar los correspondientes Dockerfiles para cada una de éstas partes. No profundizaremos mucho en como se han realizado los Dockerfiles simplemente añadir que en éstos se indica como instalar las dependencias correspondientes de cada aplicación y las directivas para cuando se ejecute el contenedor:
+Para empezar debemos realizar los correspondientes Dockerfiles para cada una de éstas partes. No profundizaremos mucho en como se han realizado los Dockerfiles simplemente añadir que en éstos se indica como instalar las dependencias correspondientes de cada aplicación y las directivas para cuando se ejecute el contenedor.
 
-´´´ bash
-hola
-´´´
+Aqui se muestra el primer Dockerfile para la aplicación Angular. 
+
+``` bash
+# base image
+FROM node:9.6.1 as builder
+
+# set working directory
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
+
+# add `/usr/src/app/node_modules/.bin` to $PATH
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+
+# install and cache app dependencies
+COPY package.json /usr/src/app/package.json
+RUN npm install grunt-cli karma@0.10 bower
+RUN npm install
+
+
+# add app
+COPY . /usr/src/app
+
+# generate build
+RUN grunt compile -f
+
+##################
+### production ###
+##################
+
+# base image
+FROM nginx:1.13.9-alpine
+
+# copy artifact build from the 'build environment'
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /usr/src/app/bin /usr/share/nginx/html
+
+
+# expose port 80
+EXPOSE 80
+
+# run nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+```
 
 ## Paso 2. Desplegar clúster de kubernetes en el servidor de Hetzner.
 ### Servidores Hetzner Cloud.
