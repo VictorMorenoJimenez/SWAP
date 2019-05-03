@@ -132,12 +132,7 @@ Desde un punto de vista más cercano, diferenciando los 3 procesos de el nodo Ma
 * Kubelet actualiza el estado del pod recién creado e informa a la API server.
 * API server almacena el nuevo estado en etcd.
 
-Concepto de cluster de desplegar cluster de kubernetes en una maquina.
-Explicar el flujo de control de kubernetes. Como el master va controlando los workers.
-Como los deployments los ejecuta el master cada vez q falla algo.
-Como el master es capaz de reorganizar los pods segun sus necesidades....
-También explicar kubectl
-Explicar los ficheros yaml para los deployment.
+Ahora que ya conocemos como funciona Kubernetes, sus conceptos básicos, y conocemos la arquitectura de Docker en su forma más básica estamos preparados para comenzar con el despliegue de la aplicación en un clúster de kubernetes. 
 
 ## Paso 1. Dockerizar aplicación Django
 Aquí explicar los pasos a seguir para Dockerizar una aplicación Django separnado el backend, frotnend y db.
