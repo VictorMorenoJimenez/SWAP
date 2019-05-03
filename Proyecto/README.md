@@ -87,6 +87,16 @@ Como ya sabemos, Kubernetes se encarga de gestionar un conjunto de contenedores 
 
 ![Arquitectura Kubernetes](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/kubernetesarchitecture.png)
 
+Esta imágen define perfectamente el funcionamiento de Kubernetes. Empecemos explicando un poco los componentes...
+* Master
+* Api Server
+* Scheduler
+* Controller Manager
+* Kubelet
+* Proxy
+* Pod
+
+
 Concepto de cluster de desplegar cluster de kubernetes en una maquina.
 Explicar el flujo de control de kubernetes. Como el master va controlando los workers.
 Como los deployments los ejecuta el master cada vez q falla algo.
