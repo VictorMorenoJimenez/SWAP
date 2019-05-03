@@ -89,12 +89,30 @@ Como ya sabemos, Kubernetes se encarga de gestionar un conjunto de contenedores 
 
 Esta imágen define perfectamente el funcionamiento de Kubernetes. Empecemos explicando un poco los componentes...
 * Master
+
+El nodo Master realmente es un conjunto de 3 procesos que se encargan de cumplir los requisitos de cada uno de los pods. 
+Estos tres procesos son: Kubernetes kube-controller-manager, kube-apiserver y kube-scheduler.
+
 * Api Server
+
+Se encarga de validar y configurar la información de los objetos tales como pods, servicios, replica controllers... Forma parte del nodo Master.
+
+
 * Scheduler
+
+Scheduler se encarga de hacer cumplir los requisitos de cada pod previamente introducidos por la API. También se encarga de distrbuir las réplicas de los pods por el clúster. Si el scheduler falla al intentar cumplir los requisitos de un pod, intentará reorganizarlo hasta que la máquina esté disponible.
+
 * Controller Manager
+
+Es un daemon o demonio que agrupa el núcleo principal de control de Kubernetes. Es un bucle constante que se encarga de revisar el estado del cluster a través de la API server y hace los cambios convenientes para pasar del estado actual al estado deseado. Algunos ejemplos de controladoers son: replication controller, endpoint controller, namespace controler...
+
+
 * Kubelet
-* Proxy
-* Pod
+
+El kubelet es la unidad primaria de Kubernetes. Cada nodo posee un agente llamado kubelet. Kubelete abstrae la información de requisitos de un pod a través de la API server y se encarga de que lo descrito en estos ficheros .yaml de configuración esté en sintonía con el estado del pod. 
+
+
+Ahora que ya conocemos los conceptos básicos vamos a ver como interactúan entre ellos: 
 
 
 Concepto de cluster de desplegar cluster de kubernetes en una maquina.
