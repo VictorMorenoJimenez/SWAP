@@ -171,9 +171,9 @@ Una vez tenemos un dominio asociado a nuestra ip, en mi caso tengo alojado un se
 ```
 
 Una vez instalado ejecutamos el siguiente comando para que CertBot instale los certificados SSL y modificamos la configuración de apache2 para habilitar el módulo ssl tal y como hicimos anteriormente.
-
-![certbot](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/certbot.png)
-
+```bash
+  sudo certbot --authenticator standalone --installer apache -d juanlupk.duckdns.org -d www.juanlupk.duckdns.org --pre-hook "systemctl stop apache2" --post-hook "systemctl start apache2"
+```
 
 Ahora si, accedemos al dominio en cuestión creado con duckdns y comprobamos que, efectivamente posee los certificados SSL correctamente configurados.
 
