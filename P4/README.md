@@ -81,6 +81,79 @@ Si nos fijamos en los logs, sobre las 11.28 nginx ha ido balanceando entre m1 y 
 
 ## Configurar reglas iptables cortafuegos con script.
 
+Iptables es un software que actúa de cortafuegos y se permite al super usuario crear reglas para decidir hacía donde redirigir cierto tipo de paquetes. 
+
+En nuestro caso debemos configurar el cortafuegos de una de las máquinas. En nuestro caso hemos elegido la máquina uno. Se ha creado un script script.sh con todas las directivas necesarias para habilitar todo el tráfico en localhost, y permitir accesos al puerto 80 y puerto 443. A continuación se muestraa el contenido del script.
+
+``` bash
+#!/bin/bash
+
+# (1) Eliminar todas las reglas (configuración limpia)
+iptables -F
+iptables -X
+iptables -Z
+iptables -t nat -F
+
+# (2) Política por defecto: denegar todo el tráfico
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+# (3) Permitir cualquier acceso desde localhost (interface lo)
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+
+# (4) Abrir el puerto 22 para permitir el acceso por SSH
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 22 -j ACCEPT
+
+# (5) Abrir los puertos HTTP (80) de servidor web
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 80 -j ACCEPT
+
+# (6) Abrir el puerto HTTPS (443) de servidor web
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 443 -j ACCEPT
+```
+
+Para hacer que el script se arranque al inicio de el sistema, hemos creado un servicio en systemd. Este servicio se ejecutará al inicio del sistema justo depués de se active el servicio network y permanecerá inactivo hasta el próximo inicio de sistema. Para crear un servicio del sistema debemos añadir un fichero .service como se muestra a continuación.
+
+```bash
+  sudo su
+  cd /etc/systemd/system/
+  nano iptables.service
+```
+
+Configuramos el servicio para que arranque después del servicio network y que ejecute el script creado anteriormente:
+
+```bash
+  [Unit]
+  Description=Ip tables service to secure the host
+  After=network.target
+  StartLimitIntervalSec=0
+
+  [Service]
+  Type=simple
+  Restart=always
+  RestartSec=1
+  User=root
+  ExecStart=/home/victorswap/script.sh
+
+  [Install]
+  WantedBy=multi-user.target
+```
+
+Una vez creado el servicio hacemos que se ejecute al inicio del sistema:
+
+```bash
+  systemctl enable iptables
+```
+
+Reiniciamos el sistema y comprobamos que ha creado las reglas adecuadamente:
+
+
+![balanceDemo](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/iptables.png)
+
 ### Crear servicio systemd para la creación de las reglas iptables.
 
 ## Opcional 2. Instalación certificado Certbot.
