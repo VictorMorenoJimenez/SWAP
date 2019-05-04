@@ -286,7 +286,12 @@ Cargará la configuración introducida anteriormente para poder desplegar los se
 
 Éste script creará automáticamente en hetzner dos máquinas y desplegará sobre las dos el clúster de Kubernetes. El proceso de despliegue suele tardar unos minutos, a continuación se muestra una imágen con la finalización del proceso y las máquinas hetzner corriendo.
 
-![Arquitectura Kubernetes](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hkubedeploy.png)
+![hetzner paso1](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hetznerPaso1.png)
+
+Transcurridos unos minutos el clúster de Kubernetes se ha desplegado con éxito!
+
+
+![hetzner paso2](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hetznerPaso2.png)
 
 Mencionamos el proyecto creado en github de esta gente creado por usuarios y que con una pequeña configuración poniendo las credenciales de Hetzner y poco más te crea un clúster en Hetzner Cloud.
 Explicar un poco como funciona aunq no e slo importante aquí.
