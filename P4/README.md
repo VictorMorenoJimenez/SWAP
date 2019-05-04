@@ -40,6 +40,27 @@ Una vez reiniciado el servicio la máquina ya está preparada para aceptar tráf
 ![peticionhttps](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/apachehttps.png)
 
 ## Opcional 1. Configurar certificados en ambas máquinas y configurar balanceador nginx para servir HTTP y  HTTPS.
+Para configurar los certificados en la máquina 2 procedemos de misma manera que en la máquina 1 con la única diferencia que en este caso no debemos generar un certificado nuevo, utilizaremos el mismo certificado que en la máquina 1. Recordamos los pasos a seguir:
+
+```bash
+  a2enmod ssl
+  mkdir /etc/apache2/ssl && cd /etc/apache2/ssl
+```
+
+Ahora debemos de copiar los certificados generados en la máquina 1. Para ellos utilizaremos el comando scp.
+Una vez en la máquina 1.
+```bash
+  cd /etc/apache2/ssl
+  scp apache.crt victorswap@192.168.56.51:/home/victorswap
+  scp apache.key victorswap@192.168.56.51:/home/victorswap
+```
+
+Ahora en la máquina 2 movemos el certificado a la carpeta creada anteriormente.
+
+```bash
+  cd /home/victorswap
+  mv apache.* /etc/apache2/ssl
+```
 
 ## Configurar reglas iptables cortafuegos con script.
 
