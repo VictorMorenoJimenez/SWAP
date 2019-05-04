@@ -253,6 +253,41 @@ Ahora si, todos los ingredientes están listos para desplegar el clúster de Kub
 Como hemos comentadio anteriormente, para el propósito de este documento hemos adquirido dos máquinas CX21 en los servidores de Hetzner Cloud. Esto es imprescindible ya que para desplegar un clúster de Kubernetes necesitamos varias máquinas.
 
 ### Script para lanzar clúster de Kubernetes.
+Para lanzar el clúster de Kubernetes nos hemos ayudado de un proyecto de la comunidad basado en kubespray subido a github __hkube__ :
+
+[hkube]: https://github.com/bbelky/hkube
+
+Éste proyecto permite desplegar el clúster de Kubernetes en servidores Hetzner con muy poca configuración. Primero clonamos el repositorio:
+
+```bash
+ git clone https://github.com/bbelky/hkube
+ sudo nano config.json
+```
+
+![Arquitectura Kubernetes](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hkubeconf.png)
+
+* hcloud_token: token de la api de hetzner.
+* hcloud_user_sshkey_name: la clave ssh introducida en hetzner.
+* hcloud_server_type: tipo de servidor contratado.
+* hcloud_name: nombre del proyecto en hetzner cloud.
+* hcloud_count: número de servidores a desplegar.
+
+Con esta breve configuración estamos casi listos para realizar el despliegue de Kubernetes. Antes de nada debemos cargar la configuración con el siguiente comando:
+
+```bash
+ ./hkube config
+```
+
+Cargará la configuración introducida anteriormente para poder desplegar los servidores correctamente. Ahora simplemente lanzamoe el script de despliegue:
+
+```bash
+ ./hkube deploy
+```
+
+Éste script creará automáticamente en hetzner dos máquinas y desplegará sobre las dos el clúster de Kubernetes. El proceso de despliegue suele tardar unos minutos, a continuación se muestra una imágen con la finalización del proceso y las máquinas hetzner corriendo.
+
+![Arquitectura Kubernetes](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hkubedeploy.png)
+
 Mencionamos el proyecto creado en github de esta gente creado por usuarios y que con una pequeña configuración poniendo las credenciales de Hetzner y poco más te crea un clúster en Hetzner Cloud.
 Explicar un poco como funciona aunq no e slo importante aquí.
 
