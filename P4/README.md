@@ -69,7 +69,14 @@ Ahora, accedemos a la máquina 3, el balanceador y procedemos a editar el ficher
 
 Nótese que en las directivas ssl_certificate y ssl_certificate_key debemos poner la ruta a la carpeta donde hayamos copiado los certificados creados en la máquina 1. Lo podemos hacer como en el paso anterior utilizando scp o bien utilizando rsync o incluso podemos copiar el certificado manualmente (no se recomienda). 
 
-Si recapitulamos, hemos creado un certificado ssl en la máquina uno para asegurar nuestra granja web.
+Si recapitulamos, hemos creado un certificado ssl en la máquina 1 para asegurar nuestra granja web. Éste certificado lo hemos copiado en la máquina 2 y en el balanceador nginx. Hemos configurado los ficheros de configuración de apache2 en las máquinas finales y el fichero de configuración de nginx en el balanceador para aceptar tráfico HTTP y HTTPS.
+
+A continuación se muestra como al hacer peticiones al balanceador 192.168.56.52 redirige el tráfico entre la máquina 1 y la máquina 2.
+
+![balanceDemo](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/demostracionBalance.png)
+
+Si nos fijamos en los logs, sobre las 11.28 nginx ha ido balanceando entre m1 y m2 tanto HTTP como HTTPS
+
 
 
 ## Configurar reglas iptables cortafuegos con script.
