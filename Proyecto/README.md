@@ -489,14 +489,18 @@ Por último para conectar el frontend con el exterior creamos el servicio coment
 
 Es muy importante quedarse con el puerto que muestra el comando anterior NodePort ya que será nuestro puerto de acceso desde el exterior.
 
+### Resultado final
+
 Abrimos un navegador y accedemos a la IP de el Master en el puerto especificado y ya tenemos acceso a nuestra aplicación desplegada en Kubernetes.
 
 ![ServicioConex](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/imagenFinal.png)
 
+## Extra. Dashboard Kubernetes.
+
+Adicionalmente, Kubernetes nos ofrece un panel de control web muy intuitivo y fácil de manejar. Con el podemos 
 
 
-### Resultado final
-Mostrar la funcionalidad que la aplicación django funciona correctamente dockerizada en el clúster de Kubernetes
+
 
 
 
