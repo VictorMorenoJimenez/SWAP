@@ -300,13 +300,173 @@ Como tenemos nuestra clave pública añadida en hetzner cloud, podemos acceder a
 
 ![Kubernetes 1](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/primeraKubernetes.png)
 
-Comprobamos que tenemos los dos nodos activos, y que el servicio de ClusterIP. Comprobamos que no hay ningun pod disponible ya que no hemos creado nada aún. Simplemente tenemos los dos nodos activos, uno en cada máquina Hetzner y los servicios básicos de Kubernetes. 
-
-
+Comprobamos que tenemos los dos nodos activos, y que el servicio de ClusterIP. También con el comando kubectl get pod, vemos que no hay ningun pod disponible ya que no hemos creado nada aún. Simplemente tenemos los dos nodos activos, uno en cada máquina Hetzner y los servicios básicos de Kubernetes. 
 
 ## Paso 3. Crear deployments para los contenedores.
-Explicar como se han creado los ficheros .yaml de los deployments y mostrar una captura así como 
-el comando para hacerlos correr con kubectl.
+Llegados a este punto, debemos crear los ficheros .yaml conocidos como deployments. Como ya sabemos estos ficheros guardan la configuración de los pods y el Master se encarga de que esto se cumpla. Podríamos crear todos los deployments en un mismo fichero separados por tres guiones pero por modularidad y separación se ha preferido hacer en ficheros separados. 
+
+Para empezar mostramos el fichero que se encarga de desplegar el contenedor del frontend. Le indicamos al Master en que puerto corre el pod, el número de replicas y también de donde descargar la imágen del contenedor. Antes de poder descargar la imagen del registro privado debemos iniciar sesión con el registry privado, lo veremos más adelante.
+
+```bash
+ cat frontend.yaml
+```
+
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: copicloud-frontend
+spec:
+  selector:
+    matchLabels:
+      app: copicloud-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: copicloud-frontend
+    spec:
+      containers:
+      - name: copicloud-frontend
+        image: registry.git.intelligenia.com/autoprinter/copicloud/frontend_last
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred
+```
+
+El siguiente deployment de desplegar el pod para el backend.
+
+```bash
+ cat backend.yaml
+```
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: copicloud-backend
+spec:
+  selector:
+    matchLabels:
+      app: copicloud-backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: copicloud-backend
+    spec:
+      containers:
+      - name: backend
+        image: registry.git.intelligenia.com/autoprinter/copicloud/backend
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: regcred
+```
+
+Por último el deployment para la base de datos mariadb. Éste lo creamos a partir de un contenedor genérico de mariadb localizado en los repositorios oficiales de dockerhub.
+
+```bash
+ cat mariadb.yaml
+```
+
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+spec:
+  selector:
+    matchLabels:
+      app: mariadb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+      - image: mariadb:latest
+        name: mariadb
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: copicloud
+        - name: MYSQL_USER
+          value: copicloud
+        - name: MYSQL_PASSWORD
+          value: copicloud
+        - name: MYSQL_DATABASE
+          value: copicloud
+        ports:
+        - containerPort: 3307
+          name: mariadb
+        volumeMounts:
+        - name: mariadb-persistent-storage
+          mountPath: /var/lib/mariadb
+      volumes:
+      - name: mariadb-persistent-storage
+        persistentVolumeClaim:
+          claimName: mariadb-pv-claim
+```
+
+Es importante destacar que en este caso se utilizan volumes con data persistente en el tiempo, es decir que no se borran en caso de que se borre el pod. Para ello tenemos que crear un volumen persistente:
+
+```bash
+ cat mariadb-pv.yaml
+```
+
+```bash
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mariadb-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+```
+
+El siguiente paso será iniciar sesion en el registry si tenemos la imagen en un registry privado.
+
+```bash
+ docker login registry.privado.dominio
+```
+
+Al iniciar sesión Kubernetes nos va a crear un fichero de configuración en .docker/config.json con la clave del registor privado.
+
+```bash
+  root@node1:~# cat .docker/config.json 
+ {
+  "auths": {
+   "registry.git.intelligenia.com": {
+    "auth": "*********************************"
+   }
+  },
+  "HttpHeaders": {
+   "User-Agent": "Docker-Client/18.09.5 (linux)"
+  }
+ }
+```
 
 ### Resultado final
 Mostrar la funcionalidad que la aplicación django funciona correctamente dockerizada en el clúster de Kubernetes
