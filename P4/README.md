@@ -152,7 +152,7 @@ Una vez creado el servicio hacemos que se ejecute al inicio del sistema:
 Reiniciamos el sistema y comprobamos que ha creado las reglas adecuadamente:
 
 
-![balanceDemo](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/iptables.png)
+![iptables](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/iptables.png)
 
 ### Crear servicio systemd para la creación de las reglas iptables.
 
