@@ -475,6 +475,15 @@ Vamos a crear un secret asociado al fichero de configuración anterior para que 
 
 Hemos creado un secreto llamado regcred que se utilizará en los deployment.
 
+En este punto, ya tenemos todas las piezas de nuestro puzzle listas para ser encajadas. Aunque, aún falta un pequeño detalle y es que, para acceder a nuestra aplicación desde el exterior, debemos crear un servicio que conecte con el pod del frontend y exponga un puerto en la máquina real. Sin embaro primero tenemos que lanzar los deployment para crear los pods:
+
+![Deployments](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/crearDeployments.png)
+
+
+```bash
+ kubectl expose deployment copicloud-frontend --type=NodePort --name=conexionExterior
+```
+
 ### Resultado final
 Mostrar la funcionalidad que la aplicación django funciona correctamente dockerizada en el clúster de Kubernetes
 
