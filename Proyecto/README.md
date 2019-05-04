@@ -479,10 +479,21 @@ En este punto, ya tenemos todas las piezas de nuestro puzzle listas para ser enc
 
 ![Deployments](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/crearDeployments.png)
 
+Tras unos minutos de despliegue, ya que la imagen del backend ocupa unos 3GB, tenemos todos nuestros pods corriendo.
 
-```bash
- kubectl expose deployment copicloud-frontend --type=NodePort --name=conexionExterior
-```
+![PodRunning](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/podsRunning.png)
+
+Por último para conectar el frontend con el exterior creamos el servicio comentado anteriormente:
+
+![ServicioConex](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/servicioConexion.png)
+
+Es muy importante quedarse con el puerto que muestra el comando anterior NodePort ya que será nuestro puerto de acceso desde el exterior.
+
+Abrimos un navegador y accedemos a la IP de el Master en el puerto especificado y ya tenemos acceso a nuestra aplicación desplegada en Kubernetes.
+
+![ServicioConex](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/imagenFinal.png)
+
+
 
 ### Resultado final
 Mostrar la funcionalidad que la aplicación django funciona correctamente dockerizada en el clúster de Kubernetes
