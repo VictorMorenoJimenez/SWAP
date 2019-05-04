@@ -554,7 +554,8 @@ Y para terminar, se nos muestra todo el panel dashboard.
 
 ![PanelDashboard](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/dashboard.png)
 
+No es el propósito de este documento ilustrar el funcionamiento del dashboard de Kubernetes pero es una herramienta realmente útil con la que administrar el clúster. Facilita el uso ya que nos podemos olvidar de la terminal y de estar tecleando comandos contínuamente. 
 
-
+En definitiva y para concluir, puede resultar un poco tedioso el hecho de dockerizar una aplicación y desplegarla sobre un clúster de Kubernetes pero lo que es seguro, es que ésto beneficiará en gran medida en un futuro cuando el tráfico aumente y haya que escalar horizontalmente nuestra granja de servidores. Kubernetes facilita mucho el trabajo a los administradores de sistemas que ya no han de preocuparse de si un servidor se cae o deja de estar disponible... Ya que Kubernetes (si está correctamente configurado) se encargará de asegurarse de que todos los pods cumplan los requisitos de los deployments! 
 
 
