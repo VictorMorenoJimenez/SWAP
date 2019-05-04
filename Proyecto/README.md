@@ -468,6 +468,13 @@ Al iniciar sesión Kubernetes nos va a crear un fichero de configuración en .do
  }
 ```
 
+Para permitir a los deployment utilizar información sensible como contraseñas de acceso, Kubernetes utiliza los secrets.
+Vamos a crear un secret asociado al fichero de configuración anterior para que pueda ser usado en los deployments que necesiten acceder a la imagen del registry.
+
+![Secreto](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/crearSecreto.png)
+
+Hemos creado un secreto llamado regcred que se utilizará en los deployment.
+
 ### Resultado final
 Mostrar la funcionalidad que la aplicación django funciona correctamente dockerizada en el clúster de Kubernetes
 
