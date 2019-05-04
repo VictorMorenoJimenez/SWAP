@@ -302,7 +302,7 @@ Como tenemos nuestra clave pública añadida en hetzner cloud, podemos acceder a
 
 Comprobamos que tenemos los dos nodos activos, y que el servicio de ClusterIP. También con el comando kubectl get pod, vemos que no hay ningun pod disponible ya que no hemos creado nada aún. Simplemente tenemos los dos nodos activos, uno en cada máquina Hetzner y los servicios básicos de Kubernetes. 
 
-## Paso 3. Crear deployments para los contenedores.
+## Paso 3. Crear deployments para los contenedores y desplegar aplicación.
 Llegados a este punto, debemos crear los ficheros .yaml conocidos como deployments. Como ya sabemos estos ficheros guardan la configuración de los pods y el Master se encarga de que esto se cumpla. Podríamos crear todos los deployments en un mismo fichero separados por tres guiones pero por modularidad y separación se ha preferido hacer en ficheros separados. 
 
 Para empezar mostramos el fichero que se encarga de desplegar el contenedor del frontend. Le indicamos al Master en que puerto corre el pod, el número de replicas y también de donde descargar la imágen del contenedor. Antes de poder descargar la imagen del registro privado debemos iniciar sesión con el registry privado, lo veremos más adelante.
