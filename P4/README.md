@@ -26,8 +26,18 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout
 /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
 ```
 
+![Apache2 cert](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/apache2cert.png)
 
+A continuación tenemos que activar la página que acabamos de configurar:
 
+```bash
+  a2ensite default-ssl
+  systemctl restart apache2
+```
+
+Una vez reiniciado el servicio la máquina ya está preparada para aceptar tráfico https. Lo comprobamos lanzando una petición desde el host:
+
+![peticionhttps](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/apachehttps.png)
 
 ## Opcional 1. Configurar certificados en ambas máquinas y configurar balanceador nginx para servir HTTP y  HTTPS.
 
