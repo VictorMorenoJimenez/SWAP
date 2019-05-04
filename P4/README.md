@@ -62,6 +62,12 @@ Ahora en la máquina 2 movemos el certificado a la carpeta creada anteriormente.
   mv apache.* /etc/apache2/ssl
 ```
 
+### Configurar nginx para balancear tanto HTTP como HTTPS
+Ahora, accedemos a la máquina 3, el balanceador y procedemos a editar el fichero de configuración de nginx. Debemos modificarlo para que acepte tanto el tráfico por el puerto 443 como el tráfico por el puerto 80. Con las siguientes directivas, por defecto nginx balanceará a https pero como tiene la directiva listen 80 también balanceará tráfico HTTP.
+
+![nginxConf](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/nginxConf.png)
+
+
 ## Configurar reglas iptables cortafuegos con script.
 
 ### Crear servicio systemd para la creación de las reglas iptables.
