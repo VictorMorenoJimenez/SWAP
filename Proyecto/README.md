@@ -264,7 +264,7 @@ Para lanzar el clúster de Kubernetes nos hemos ayudado de un proyecto de la com
  sudo nano config.json
 ```
 
-![Arquitectura Kubernetes](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hkubeconf.png)
+!hkube conf](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hkubeconf.png)
 
 * hcloud_token: token de la api de hetzner.
 * hcloud_user_sshkey_name: la clave ssh introducida en hetzner.
@@ -278,7 +278,9 @@ Con esta breve configuración estamos casi listos para realizar el despliegue de
  ./hkube config
 ```
 
-Cargará la configuración introducida anteriormente para poder desplegar los servidores correctamente. Ahora simplemente lanzamoe el script de despliegue:
+### Despliegue clúster Kubernetes
+Una vez cargada la configuración, está todo preparado para lanzar nuestro clúster de Kubernetes sobre hetzner cloud.
+El siguiente comando cargará la configuración introducida anteriormente para poder desplegar los servidores correctamente. Ahora simplemente lanzamoe el script de despliegue:
 
 ```bash
  ./hkube deploy
@@ -290,17 +292,17 @@ Cargará la configuración introducida anteriormente para poder desplegar los se
 
 Transcurridos unos minutos el clúster de Kubernetes se ha desplegado con éxito!
 
-
 ![hetzner paso2](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hetznerPaso2.png)
 
-Mencionamos el proyecto creado en github de esta gente creado por usuarios y que con una pequeña configuración poniendo las credenciales de Hetzner y poco más te crea un clúster en Hetzner Cloud.
-Explicar un poco como funciona aunq no e slo importante aquí.
 
-### Despliegue clúster Kubernetes
-Aquí hacemos una pequeña demo de como lanzando el hkube y el kubespray se lanza el clúster de kubernetes. Explicar algún fichero de configuración pero con una buena demo basta.
+### Acceso a las máquinas Kubernetes
+Como tenemos nuestra clave pública añadida en hetzner cloud, podemos acceder a las máquinas via ssh. Hacemos ssh a la máquina 1 que es el Master y comprobamos que todo se ha desplegado correctamente.
 
-### Panel de control Kubernetes
-Explicar como se lanza el panel de control como se instala y mostrar algunas capturas para ver la funcionalidad.
+![Kubernetes 1](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/primeraKubernetes.png)
+
+Comprobamos que tenemos los dos nodos activos, y que el servicio de ClusterIP. Comprobamos que no hay ningun pod disponible ya que no hemos creado nada aún. Simplemente tenemos los dos nodos activos, uno en cada máquina Hetzner y los servicios básicos de Kubernetes. 
+
+
 
 ## Paso 3. Crear deployments para los contenedores.
 Explicar como se han creado los ficheros .yaml de los deployments y mostrar una captura así como 
