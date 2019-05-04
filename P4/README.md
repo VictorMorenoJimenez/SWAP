@@ -115,6 +115,7 @@ iptables -A OUTPUT -p tcp --sport 80 -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 iptables -A OUTPUT -p tcp --sport 443 -j ACCEPT
 ```
+### Crear servicio systemd para la creación de las reglas iptables.
 
 Para hacer que el script se arranque al inicio de el sistema, hemos creado un servicio en systemd. Este servicio se ejecutará al inicio del sistema justo depués de se active el servicio network y permanecerá inactivo hasta el próximo inicio de sistema. Para crear un servicio del sistema debemos añadir un fichero .service como se muestra a continuación.
 
@@ -154,6 +155,26 @@ Reiniciamos el sistema y comprobamos que ha creado las reglas adecuadamente:
 
 ![iptables](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/iptables.png)
 
-### Crear servicio systemd para la creación de las reglas iptables.
 
 ## Opcional 2. Instalación certificado Certbot.
+
+Para instalar un certificado no autofirmado gestionado por el software Certbot, he utilizado un dominio configurado previamente con duckdns. Para ésto debemos entrar en la página oficial de duckdns, registrarnos y solicitar un dominio disponible. Duckdns se encargará de hacer que el dominio elegido (en mi caso juanlupk.duckdns.org) apunte a nuestra dirección ip pública. Ésto lo consigue mediante un pequeño script que se tiene que instalar en la máquina y que comprueba si ha cambiado tu ip pública.
+
+![duckdns](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/duckdnsscript.png)
+
+Una vez tenemos un dominio asociado a nuestra ip, en mi caso tengo alojado un servidor web apache2 con varios proyectos web y un servidor de ficheros. Para configurar un certificado utilizando el software CertBot primero lo instalaremos en la máquina. Añadimos el repositorio y instalamos el agente CertBot.
+
+```bash
+   sudo add-apt-repository ppa:certbot/certbot
+   sudo apt-get update
+   sudo apt-get install certbot python-certbot-apache 
+```
+
+Una vez instalado ejecutamos el siguiente comando para que CertBot instale los certificados SSL y modificamos la configuración de apache2 para habilitar el módulo ssl tal y como hicimos anteriormente.
+
+![certbot](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/certbot.png)
+
+
+Ahora si, accedemos al dominio en cuestión creado con duckdns y comprobamos que, efectivamente posee los certificados SSL correctamente configurados.
+
+![pruebaFinal](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/pruebaFinal.png)
