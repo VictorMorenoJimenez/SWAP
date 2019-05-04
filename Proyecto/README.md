@@ -497,8 +497,62 @@ Abrimos un navegador y accedemos a la IP de el Master en el puerto especificado 
 
 ## Extra. Dashboard Kubernetes.
 
-Adicionalmente, Kubernetes nos ofrece un panel de control web muy intuitivo y fácil de manejar. Con el podemos 
+Adicionalmente, Kubernetes nos ofrece un panel de control web muy intuitivo y fácil de manejar. Con el podemos administarr los pods, los servicios, los deployments... En general nos ofrece un control total sobre el clúster. 
 
+Para desplegar el dashboard, primero debemos crear un fichero de configuración .yaml. Este fichero creará un usuario con el cual poder acceder al dashboard.
+
+```bash
+ cat dashboard.yaml
+```
+
+```bash
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kube-system
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kube-system
+```
+
+Le realizamos el apply:
+
+
+```bash
+root@node1:~# kubectl apply -f dashboard.yaml 
+serviceaccount/admin-user created
+clusterrolebinding.rbac.authorization.k8s.io/admin-user created
+root@node1:~# 
+```
+Seguidamente ejecutamos el siguiente comando para obtener el token de acceso al dashboard:
+
+![TokenAdmin](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/tokenadmin.png)
+
+La url de acceso al dashboard es la siguiente:
+```bash
+ https://195.201.20.110:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=default
+```
+
+Aceptamos el riesgo de seguridad por el certificado ssl autofirmado y nos presenta una pantalla donde debemos pegar el token anterior:
+
+![PanelAdmin](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/paneladmin.png)
+
+Y para terminar, se nos muestra todo el panel dashboard.
+
+![PanelDashboard](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/dashboard.png)
 
 
 
