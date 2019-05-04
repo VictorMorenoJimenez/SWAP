@@ -264,7 +264,7 @@ Para lanzar el clúster de Kubernetes nos hemos ayudado de un proyecto de la com
  sudo nano config.json
 ```
 
-!hkube conf](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hkubeconf.png)
+[!hkube conf](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/Proyecto/img/hkubeconf.png)
 
 * hcloud_token: token de la api de hetzner.
 * hcloud_user_sshkey_name: la clave ssh introducida en hetzner.
