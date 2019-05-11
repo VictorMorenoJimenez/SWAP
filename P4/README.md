@@ -117,20 +117,30 @@ Reiniciamos el servicio y procedemos a acceder a la máquina 1. Ahora, tenemos q
 ```bash
   mysql -uroot -p
   mysql> CREATE USER esclavo IDENTIFIED BY 'esclavo';
-Query OK, 0 rows affected (0.01 sec)
+  Query OK, 0 rows affected (0.01 sec)
 
-mysql> GRANT REPLICATION SLAVE ON *.* TO 'esclavo'@'%' IDENTIFIED BY 'esclavo';
-Query OK, 0 rows affected, 1 warning (0.02 sec)
+  mysql> GRANT REPLICATION SLAVE ON *.* TO 'esclavo'@'%' IDENTIFIED BY 'esclavo';
+  Query OK, 0 rows affected, 1 warning (0.02 sec)
 
-mysql> FLUSH PRIVILEGES;
-Query OK, 0 rows affected (0.01 sec)
+  mysql> FLUSH PRIVILEGES;
+  Query OK, 0 rows affected (0.01 sec)
 
-mysql> FLUSH TABLES;
-Query OK, 0 rows affected (0.02 sec)
+  mysql> FLUSH TABLES;
+  Query OK, 0 rows affected (0.02 sec)
 
-mysql> FLUSH TABLES WITH READ LOCK;
-Query OK, 0 rows affected (0.00 sec)
+  mysql> FLUSH TABLES WITH READ LOCK;
+  Query OK, 0 rows affected (0.00 sec)
+  
+  mysql> SHOW MASTER STATUS;
+  +------------------+----------+--------------+------------------+-------------------+
+  | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
+  +------------------+----------+--------------+------------------+-------------------+
+  | mysql-bin.000001 |      980 |              |                  |                   |
+  +------------------+----------+--------------+------------------+-------------------+
+  1 row in set (0.00 sec)
 
-mysql> 
 
 ```
+
+Muy importante, guardar la información que nos muestra el comando show master status. Ya que a continuación la introduciremos en la máquina esclava para poder realizar la replicación.
+
