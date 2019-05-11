@@ -154,4 +154,4 @@ Muy importante, guardar la información que nos muestra el comando show master s
 
 Desbloqueamos las tablas en el master y procedemos a hacer la prueba para ver que se sincronizan correctamente.
 
-[![maestroEsclavo](https://asciinema.org/a/H1g0ruVu5QZcjLEmyhf22M5g9](https://asciinema.org/a/H1g0ruVu5QZcjLEmyhf22M5g9
+[![asciicast](https://asciinema.org/a/H1g0ruVu5QZcjLEmyhf22M5g9.svg)](https://asciinema.org/a/H1g0ruVu5QZcjLEmyhf22M5g9)
