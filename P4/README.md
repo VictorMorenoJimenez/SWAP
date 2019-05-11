@@ -30,16 +30,19 @@ Antes de importar el fichero, hay que crear la base de datos ya que el fichero .
   CREATE DATABASE contactos;
 ```
 
-
 Con esto ya tenemos hecha la copia de seguridad, el único inconveniente es que ésto se tiene que realizar a mano y si tienes muchas máquinas es inviable. Para solucionar ésto vamos a crear una configuración maestro-esclavo para que las copias de seguridad se realicen periódicamente de forma automatizada.
 
 
 ### Configurar maestro-esclavo, clonado automático.
-Ahora, accedemos a la máquina 3, el balanceador y procedemos a editar el fichero de configuración de nginx. Debemos modificarlo para que acepte tanto el tráfico por el puerto 443 como el tráfico por el puerto 80. Con las siguientes directivas, por defecto nginx balanceará a https pero como tiene la directiva listen 80 también balanceará tráfico HTTP.
+Para empezar accedemos a la máquina 1 que será nuestro Maestro y editamos el fichero de configuración como root. 
 
-![nginxConf](https://raw.githubusercontent.com/VictorMorenoJimenez/SWAP/master/P4/img/nginxConf.png)
+```bash
+  sudo nano /etc/mysql/my.cnf
+```
 
-Nótese que en las directivas ssl_certificate y ssl_certificate_key debemos poner la ruta a la carpeta donde hayamos copiado los 
+El fichero de configuración deber quedar de la siguiente manera:
 
-
+```bash
+  sudo nano /etc/mysql/my.cnf
+```
 
