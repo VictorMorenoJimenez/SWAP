@@ -151,3 +151,7 @@ Muy importante, guardar la información que nos muestra el comando show master s
     MASTER_USER='esclavo', MASTER_PASSWORD='esclavo',MASTER_LOG_FILE='mysql-bin.000001', 
     MASTER_LOG_POS=980, MASTER_PORT=3306;
 ```
+
+Desbloqueamos las tablas en el master y procedemos a hacer la prueba para ver que se sincronizan correctamente.
+
+[![maestroEsclavo](https://asciinema.org/a/H1g0ruVu5QZcjLEmyhf22M5g9](https://asciinema.org/a/H1g0ruVu5QZcjLEmyhf22M5g9
