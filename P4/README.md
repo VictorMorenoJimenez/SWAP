@@ -76,3 +76,61 @@ max_binlog_size   = 100M
 
 ```
 
+La configuración del esclavo en la máquina 2, si tenemos versiones actualmes de MySQL, es exactamente igual que la de M1, únicamente cambia el server-id, que en este caso será 2. 
+
+```bash
+  [mysqld_safe]
+socket		= /var/run/mysqld/mysqld.sock
+nice		= 0
+
+[mysqld]
+user		= mysql
+pid-file	= /var/run/mysqld/mysqld.pid
+socket		= /var/run/mysqld/mysqld.sock
+port		= 3306
+basedir		= /usr
+datadir		= /var/lib/mysql
+tmpdir		= /tmp
+lc-messages-dir	= /usr/share/mysql
+
+skip-external-locking
+key_buffer_size		= 16M
+max_allowed_packet	= 16M
+thread_stack		= 192K
+thread_cache_size       = 8
+query_cache_limit	= 1M
+query_cache_size        = 16M
+
+log_error = /var/log/mysql/error.log
+
+server-id		= 2
+log_bin			= /var/log/mysql/mysql-bin.log
+
+expire_logs_days	= 10
+
+max_binlog_size   = 100M
+
+```
+
+Reiniciamos el servicio y procedemos a acceder a la máquina 1. Ahora, tenemos que crear un usuario en la base de datos con permisos para que pueda replicar la base de datos.
+
+```bash
+  mysql -uroot -p
+  mysql> CREATE USER esclavo IDENTIFIED BY 'esclavo';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'esclavo'@'%' IDENTIFIED BY 'esclavo';
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> FLUSH TABLES;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> FLUSH TABLES WITH READ LOCK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+
+```
