@@ -37,12 +37,58 @@ Con esto ya tenemos hecha la copia de seguridad, el único inconveniente es que 
 Para empezar accedemos a la máquina 1 que será nuestro Maestro y editamos el fichero de configuración como root. 
 
 ```bash
-  sudo nano /etc/mysql/my.cnf
+  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
 ```
 
 El fichero de configuración deber quedar de la siguiente manera:
 
 ```bash
-  sudo nano /etc/mysql/my.cnf
+  [mysqld_safe]
+socket		= /var/run/mysqld/mysqld.sock
+nice		= 0
+
+[mysqld]
+user		= mysql
+pid-file	= /var/run/mysqld/mysqld.pid
+socket		= /var/run/mysqld/mysqld.sock
+port		= 3306
+basedir		= /usr
+datadir		= /var/lib/mysql
+tmpdir		= /tmp
+lc-messages-dir	= /usr/share/mysql
+
+skip-external-locking
+#bind-address		= 127.0.0.1
+key_buffer_size		= 16M
+max_allowed_packet	= 16M
+thread_stack		= 192K
+thread_cache_size       = 8
+#max_connections        = 100
+#table_cache            = 64
+#thread_concurrency     = 10
+query_cache_limit	= 1M
+query_cache_size        = 16M
+#general_log_file        = /var/log/mysql/mysql.log
+#general_log             = 1
+
+log_error = /var/log/mysql/error.log
+
+#log_slow_queries	= /var/log/mysql/mysql-slow.log
+#long_query_time = 2
+#log-queries-not-using-indexes
+
+server-id		= 1
+log_bin			= /var/log/mysql/mysql-bin.log
+
+expire_logs_days	= 10
+
+max_binlog_size   = 100M
+#binlog_do_db		= include_database_name
+#binlog_ignore_db	= include_database_name
+
+# ssl-ca=/etc/mysql/cacert.pem
+# ssl-cert=/etc/mysql/server-cert.pem
+# ssl-key=/etc/mysql/server-key.pem
+
 ```
 
