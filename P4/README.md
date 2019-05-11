@@ -142,5 +142,12 @@ Reiniciamos el servicio y procedemos a acceder a la máquina 1. Ahora, tenemos q
 
 ```
 
-Muy importante, guardar la información que nos muestra el comando show master status. Ya que a continuación la introduciremos en la máquina esclava para poder realizar la replicación.
+Muy importante, guardar la información que nos muestra el comando show master status. Ya que a continuación la introduciremos en la máquina esclava para poder realizar la replicación. Accedemos a la interfaz de mysql.
+
+```bash
+    mysql -uroot -p
+    mysql> CHANGE MASTER TO MASTER_HOST='192.168.56.50', 
+    MASTER_USER='esclavo', MASTER_PASSWORD='esclavo',MASTER_LOG_FILE='mysql-bin.000001', 
+    MASTER_LOG_POS=980, MASTER_PORT=3306;
+```
 
